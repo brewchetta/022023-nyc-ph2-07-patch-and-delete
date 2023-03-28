@@ -1,5 +1,4 @@
 import './App.css';
-import ComicsList from './ComicsList'
 import RaccoonsList from "./RaccoonsList"
 
 function App() {
@@ -9,8 +8,6 @@ function App() {
       <h1>React useEffect and Fetching</h1>
 
       <RaccoonsList />
-
-      <ComicsList />
 
     </div>
   );
