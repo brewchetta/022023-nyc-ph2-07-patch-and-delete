@@ -7,10 +7,12 @@ function RaccoonCard({ raccoon, patchRaccoon }) {
   function handleSubmit(e) {
     e.preventDefault()
 
+    // we need to create a newly edited raccoon object upon form submission
     const editedRaccoon = { ...raccoon, favFood: newFavFood }
-
+    // and send that object up to our RaccoonsList
     patchRaccoon(editedRaccoon)
 
+    // this just clears the state for the form
     setNewFavFood('')
   }
 
@@ -21,6 +23,7 @@ function RaccoonCard({ raccoon, patchRaccoon }) {
             <h2>Name: {raccoon.name}</h2>
             <p>Favorite Food: {raccoon.favFood}</p>
 
+            {/* this is a simple form to update a favorite food */}
             <form onSubmit={handleSubmit}>
               <input type="text" onChange={handleChange} value={newFavFood} />
               <input type="submit" value={'Change Favorite Food'} />
