@@ -31,9 +31,26 @@ function RaccoonsList() {
     .then( newRaccoonFromDB => setRaccoonsArr( [ ...raccoonsArr, newRaccoonFromDB ] ) )
   }
 
+  function patchRaccoon( editedRaccoon ) {
+    fetch(`http://localhost:3002/raccoons/${editedRaccoon.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accepts': 'application/json'
+      },
+      body: JSON.stringify(editedRaccoon)
+    })
+    .then(res => res.json())
+    .then(newRaccoon => {
+      const editedRaccoonsArray = raccoonsArr.map( raccoon => raccoon.id === editedRaccoon.id ? editedRaccoon : raccoon )
+
+      setRaccoonsArr( editedRaccoonsArray )
+    })
+  }
+
   // RENDERS//
 
-  const mappedRaccoons = raccoonsArr.map( raccoon => <RaccoonCard key={raccoon.id} raccoon={raccoon} /> )
+  const mappedRaccoons = raccoonsArr.map( raccoon => <RaccoonCard key={raccoon.id} raccoon={raccoon} patchRaccoon={patchRaccoon} /> )
 
   return (
     <div className="raccoons-list border-black">
